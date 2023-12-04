@@ -3,9 +3,10 @@ lines = file.readlines()
 cardCount = [1 for x in range(len(lines))]
 points = 0
 for n, line in enumerate(lines):
-    win, play = line.split(':')[1].split('|')
-    win = [int(s) for s in win.split()]
-    play = [int(s) for s in play.split()]
+    sepCol = line.index(':')
+    sepBar = line.index('|')
+    win = line[sepCol+1:sepBar].split()
+    play = line[sepBar:].split()
     wins = len([x for x in win if x in play])
     points += int(2**(wins - 1))
     for i in range(wins):
