@@ -21,7 +21,7 @@ for row in range(len(lines)):
         sym = match.group()
         x1, x2 = match.span()
         x1 = max(x1 - 1, 0) # expand the range one entry around the symbol
-        x2 = min(x2 + 1, len(lines[0]))
+        x2 = min(x2 + 1, len(lines[0]) + 1)
         matches = []
         for otherRow in [prevLine, curLine, nextLine]:
             for num in list(otherRow):
