@@ -5,7 +5,7 @@
 #include <filesystem>
 using namespace std;
 
-vector<string> readFile(const string& filename)
+inline vector<string> readFile(const string& filename)
 {
     vector<string> res;
     ifstream ifile(filename);

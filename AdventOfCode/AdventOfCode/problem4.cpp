@@ -63,7 +63,8 @@ void problem4()
     sum = accumulate(cardCount.begin(), cardCount.end(), sum);
 
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
-    cout << "Time difference = " << chrono::duration_cast<chrono::microseconds>(end - begin).count()/1000.0f << "[ms]" << endl;
+    cout << "problem 4" << endl;
     cout << "part1 : " << points << endl;
     cout << "part2 : " << sum << endl;
+    cout << "Time = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() / 1000.0f << "[ms]" << endl;
 }
