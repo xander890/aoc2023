@@ -2,24 +2,19 @@ import functools
 file = open('input7.txt', 'r')
 lines = file.readlines()
 
-valueMap1 = {x : i for i,x in enumerate("23456789TJQKA")}
-valueMap2 = {x : i for i,x in enumerate("J23456789TQKA")}
-
-# how many sets of   1,2,3,4,5 cards there are    
-FIVEOFAKIND =       (0,0,0,0,1)
-POKER =             (1,0,0,1,0)
-FULL =              (0,1,1,0,0)
-TRIS =              (2,0,1,0,0)
-DOUBLEPAIR =        (1,2,0,0,0)
-PAIR =              (3,1,0,0,0) 
-HIGHEST =           (5,0,0,0,0)
+# size of the biggest 2 sets in a hand    
+FIVEOFAKIND =       (5,)
+POKER =             (4,1)
+FULL =              (3,2)
+TRIS =              (3,1)
+DOUBLEPAIR =        (2,2)
+PAIR =              (2,1) 
+HIGHEST =           (1,1)
 ordered = [HIGHEST, PAIR, DOUBLEPAIR, TRIS, FULL, POKER, FIVEOFAKIND]
 
 def createCounts(hand):
-    vals = [0] * 5
-    for x in set(hand):
-        vals[hand.count(x) - 1] += 1
-    return tuple(vals)
+    v = sorted([hand.count(x) for x in set(hand)], reverse = True)
+    return tuple(v[0:2])
         
 def handValuePart1(x):    
     return ordered.index(createCounts(x))
@@ -52,13 +47,16 @@ def compare(hand, hand2, valfunc, valueMap):
     vh1 = valfunc(hand[0])
     vh2 = valfunc(hand2[0])
     
-    if(vh1 != vh2):
+    if vh1 != vh2:
         return vh1 - vh2
     
     for x,y in zip(hand[0], hand2[0]):
         if valueMap[x] != valueMap[y]:
             return valueMap[x] - valueMap[y]
     return 0
+
+valueMap1 = {x : i for i,x in enumerate("23456789TJQKA")}
+valueMap2 = {x : i for i,x in enumerate("J23456789TQKA")}
 
 def comparePart1(hand, hand2):
     return compare(hand, hand2, handValuePart1, valueMap1)
